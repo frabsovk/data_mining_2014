@@ -63,9 +63,9 @@ def regresion_plot(exper_data, predik_data,y_train,predTrain):
     rms = sqrt(mean_squared_error(exper_data, predik_data))
     print('RMSE modelu je rovna ' + str(rms))
 
-    # vypocet MSE grafu
-    mse = mean_absolute_error(exper_data, predik_data)
-    print('MSE modelu je rovna ' + str(mse))
+    # vypocet MAE grafu
+    mae = mean_absolute_error(exper_data, predik_data)
+    print('MAE modelu je rovna ' + str(mae))
 
     plt.ylim((2, 10))
     plt.xlabel('experimentalni_hodnoty pEC50')
@@ -75,6 +75,7 @@ def regresion_plot(exper_data, predik_data,y_train,predTrain):
     plt.legend()
     plt.show()
 
+# funkce pro rizeni zpracovani SVM regresni analyzy
 def svm_count(ligand,decoy):
 
     # nadefinovani potrebnych promennych
@@ -206,7 +207,7 @@ for row in data:
             if (row[0] not in svm_ligand.keys() and row[0] not in ligand_chyby ):
                 X.append(fps)
                 Y.append('ligand')
-                # ulozeni hodnot pE50 a fps pro svm analyzu
+                # ulozeni hodnot pEC50 a fps pro svm analyzu
                 try:
                     svm_ligand[row[0]] = [- math.log10(float(row[14])*pow(10, -9)), fps]
                 except (ValueError):
